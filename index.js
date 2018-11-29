@@ -66,7 +66,6 @@ $('img').on('click', function (m) {
     const imgId = m.target.id
     const id = $('#' + imgId).attr('data-id')
     if (clicks < 2) {
-        console.log(123444)
         $('#' + imgId).attr('src', desordenado[id - 1])
     }
 })
@@ -90,8 +89,7 @@ $('img').on('click', function () {
         var id2 = $(this).attr('id');
         var img2 = $(this).attr('data-img');
         $(this).addClass('turn');
-        tries ++
-        console.log(tries)
+        tries ++ 
         $('#effort').html(tries)
             segundoClick = {
                 id: id2,
@@ -142,7 +140,7 @@ function guardarDatos(){
     data.push(obj)
     localStorage.setItem('ranking', JSON.stringify(data))
     
-
+    //AGREGO LOS DATOS AL RANKING CUANDO ALGUIEN GANA:
     for (var i = 0; i < data.length; i++) {
         $('.player').append(`<p class='column'> ${data[i].nombre} </p>`),
         $('.levell').append(`<p class='column'> ${data[i].nivel} </p>`),
