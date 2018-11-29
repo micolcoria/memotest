@@ -54,6 +54,7 @@ body {
   background-color: #f9e9e0;
   border-radius: 15px;
   border: 10px solid black;
+  position: relative;
 }
 .table .tablero1 h1 {
   text-align: center;
@@ -65,16 +66,19 @@ body {
   color: dodgerblue;
 }
 .table .tablero {
-  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 .table .tablero img {
   width: 200px;
   height: 200px;
 }
-.table .container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.table .turn {
+  transform: rotateY(180deg);
+  transition: 0.6s;
+  transform-style: preserve-3d;
 }
 .table .tapada {
   text-align: center;
@@ -92,11 +96,14 @@ body {
 .final {
   margin: auto;
   padding: 15px;
-  width: 400px;
+  width: 500px;
   text-align: center;
   background-color: #f9e9e0;
   border-radius: 15px;
   border: 10px solid black;
+  position: absolute;
+  left: 20%;
+  top: 0;
 }
 .final p {
   font-family: "Pangolin", cursive;
@@ -110,6 +117,34 @@ body {
   cursor: pointer;
 }
 
+.ranking {
+  display: flex;
+  margin: auto;
+  width: 300px;
+  border: 1px solid black;
+  justify-content: center;
+  justify-content: space-around;
+  text-align: center;
+}
+.ranking .player, .ranking .levell {
+  border-right: 1px solid black;
+}
+.ranking .datos {
+  font-family: "Pangolin", cursive;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-size: 12px;
+  color: dodgerblue;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.ranking .column {
+  font-family: "Pangolin", cursive;
+  text-align: center;
+}
+
 .hidden {
   display: none;
 }
@@ -121,6 +156,13 @@ body {
 
 .pointer {
   pointer-events: none;
+}
+
+@media (max-width: 800px) {
+  .tapada img {
+    width: 50px;
+    height: 50px;
+  }
 }
 
 /*# sourceMappingURL=styles.css.map */

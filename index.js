@@ -1,20 +1,4 @@
-//IR DEL HOME AL TABLERO: 
-
-$('.level').on('click', function () {
-    var valorNombre = $('input').val()
-    if (valorNombre == '') {
-        $('#cartel').removeClass('hidden')
-    console.log(1)
-    } else {
-        $('#table').removeClass('hidden')
-        $(this).parent().addClass('hidden')
-        $('#value').append(valorNombre)
-        $('#tries').append('18')
-        $('#levelRequired').append('Fácil')
-    }
-})
-
-//MOSTRAR LAS IMAGENES + RANDOM
+//VARIABLES:
 const imagenes = [
     'img/alce.jpg',
     'img/alce.jpg',
@@ -29,14 +13,20 @@ const imagenes = [
     'img/zapas.jpg',
     'img/zapas.jpg'
 ]
-
+var clicks = 0; 
+var primerClick
+var segundoClick
+var tries= 0; //INTENTOS 
+var maxTries; //CANTIDAD MAXIMA DE INTENTOS POR NIVEL
+var same = 0; //COINCIDENCIA DE IMAGEN
 const desordenado = mix(imagenes)
  
-//asignar un valor a data-img
+//ASIGNA UN VALOR A DATA-IMG:
 for (var i = 1; i <= desordenado.length ; i++) {
     $('#img-'+ i).attr('data-img', desordenado[i-1])
 }
-//random
+
+//FUNCION RANDOM:
 function mix(x) {
     for (let i = x.length - 1; i > 0; i--) {
         const y = Math.floor(Math.random() * (i + 1));
@@ -45,90 +35,140 @@ function mix(x) {
     return x;
 }
 
+//FUNCION NIVELES - HOME > TABLERO:
+function nivel(){
+    $('.level').on('click', function () {
+        var level= $(this).attr('id')
+        if (level === 'facil') {
+            maxTries = 18
+        } else if (level === 'intermedio') {
+            maxTries = 12
+        } else if (level === 'experto') {
+            maxTries = 9
+        }
+        var valorNombre = $('input').val()
+        
+        if (valorNombre == '') {
+            $('#cartel').removeClass('hidden')
+        } else {
+            $('#table').removeClass('hidden')
+            $(this).parent().addClass('hidden')
+            $('#value').append(valorNombre)
+            $('#tries').append(maxTries)
+            $('#levelRequired').append(level)
+        }
+    })
+
+}
+
+//FUNCION DATA-ID Y PARA QUE NO SE MUESTREN MAS DE DOS IMAGENES
 $('img').on('click', function (m) {
     const imgId = m.target.id
     const id = $('#' + imgId).attr('data-id')
-    $('#' + imgId).attr('src', desordenado[id - 1])
-    setTimeout (function() {
-    console.log(123)        
-    }, 3000);
+    if (clicks < 2) {
+        console.log(123444)
+        $('#' + imgId).attr('src', desordenado[id - 1])
+    }
 })
 
-
-
 //COMPARACIÓN DE IMAGENES:
-// IF 
-// PRIMER CLICK = { URL & ID}
-
-var clicks = 0; 
-// xq para comparar algo 
-// (tenemos que comparar 1 carta con una 2da carta, hay que hacer 2 clicks y despues volver al momento cero)
-var primerClick
-var segundoClick
-var tries = 0;
-var same = 0;
-
 $('img').on('click', function () {
     clicks = clicks + 1 
-    // (hay que sumar 1 a los clicks, sumarle un valor a esa variable)
+    //PRIMER CLICK:
     if (clicks == 1) {
         var id = $(this).attr('id');
         var img = $(this).attr('data-img');
+        $(this).addClass('turn');
         primerClick = {
             id: id,
             img: img
-            // id: $(this).attr('id'),
-            // img: $(this).attr('data-img')
         } 
         $('#' + primerClick.id).addClass("pointer")
-        // console.log("primer click" + primerClick.id, primerClick.img)
-        
+
+        //SEGUNDO CLICK:    
     } else if (clicks == 2) {
         var id2 = $(this).attr('id');
         var img2 = $(this).attr('data-img');
-        tries = tries + 1;
+        $(this).addClass('turn');
+        tries ++
+        console.log(tries)
         $('#effort').html(tries)
             segundoClick = {
-                // id: $(this).attr('id'),
-                // img: $(this).attr('data-img')
                 id: id2,
                 img: img2
             }
         $('#'+segundoClick.id).addClass("pointer")
 
-        // console.log("segundo click" + segundoClick.id, segundoClick.img)
+            //SI SON IGUALES:
         if (primerClick.img == segundoClick.img && (primerClick.id != segundoClick.id)) {
             same = same + 1
             $('#' + primerClick.id).addClass('idem')
             $('#' + segundoClick.id).addClass('idem')
-
+            clicks = 0
             $('.idem').unbind();
-            console.log('iguales')
+
+            //SI SON DISTINTAS:
         } else {
-            //SE PONE # PORQUE LLAMO AL ID DEL OBJETO DE LA VARIABLE
             setTimeout (function() {
                 var that = this
                 $('#'+ primerClick.id).attr('src',"img/tapada.jpg")
                 $('#'+ segundoClick.id).attr('src', 'img/tapada.jpg')
                 $(that).children().attr('src', "img/tapada.jpg")
-            }, 2000)
-            $('#'+primerClick.id).removeClass("pointer")
-            $('#'+segundoClick.id).removeClass("pointer")
-            console.log('distintas')
+                clicks = 0
+
+                $('#' + primerClick.id).removeClass("pointer")
+                $('#' + segundoClick.id).removeClass("pointer")
+            }, 800)
         }
-        // comparacion: porque hay que volver a darlas vuelta para volver a empezar
-        clicks = 0
-
-        //CONTADOR TIENE QUE TENER SEIS PARES IGUALES PARA QUE GANES: .READY() PARA QUE SE EJECUTE LA FUNCION DESPUES DE QUE EL DOM DSE HAYA EJECUTADO, O SEA LOS DOS CLICKS?
-
-        if (same === 6) {
-            $('.final').removeClass('hidden');
-            $('#table').addClass('hidden');
-        }
-
     } 
+    
+    modal(); //MODAL FINAL
 })
 
-//INTENTOS:
-//variable intento fuera de todo = 0; llamo a esa variable if clicks es 2 veces, entonces sumo un intento
-//
+//LOCALSTORAGE DE GANADORES:
+
+function guardarDatos(){
+    var data = localStorage.getItem('ranking')
+    var obj = {
+        nombre: $('input').val(),
+        nivel: $('.level').html(),
+        intentos: tries
+    }
+    
+    data = JSON.parse(data) //PARA CONVERTIR EL STRING EN UN ARRAY
+    if (data == null) {
+        data = []
+    }
+    data.push(obj)
+    localStorage.setItem('ranking', JSON.stringify(data))
+    
+
+    for (var i = 0; i < data.length; i++) {
+        $('.player').append(`<p class='column'> ${data[i].nombre} </p>`),
+        $('.levell').append(`<p class='column'> ${data[i].nivel} </p>`),
+        $('.triess').append(`<p class='column'> ${data[i].intentos}</p>`)
+    }
+}
+
+
+//CUADRO DEL RANKING + MENSAJE + BOTON DE VOLVER A JUGAR
+function modal () {
+    if (same === 6) {
+        
+        $('#modal').removeClass('hidden');
+        $('#modal').append(`<p>¡Ganaste 🎉! con ${tries} intentos </p>`)
+        guardarDatos();
+    } else if (tries === maxTries) {
+        $('#table').addClass('pointer')
+        $('#table').addClass('idem')
+        $('#modal').removeClass('hidden')
+        $('#modal').append(`<p>¡Perdiste! con ${tries} intentos</p>`)
+    }
+    $('.volver').on('click', function () {
+        $('#home').removeClass('hidden')
+        $('#table').addClass('hidden')
+        $('.volver').addClass('hidden')
+        location.reload()
+    })
+  }
+nivel()
