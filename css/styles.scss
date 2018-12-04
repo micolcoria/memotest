@@ -1,7 +1,6 @@
 body {
     background-image: url("../img/fondo.jpg")
 }
-
 // VARIABLES DE FUENTES:
 $font-title: 'Pacifico', cursive;
 $color-title: dodgerblue;
@@ -80,7 +79,7 @@ $font-p: 'Pangolin', cursive;
         display: flex;
         flex-wrap: wrap;
         justify-content: center;
-        width:100%;
+        width: 70%;
         img {
             width: 200px;
             height: 200px;
@@ -164,8 +163,6 @@ $font-p: 'Pangolin', cursive;
     }
 }
 
-
-
 .hidden {
     display: none;
 }
@@ -180,6 +177,9 @@ $font-p: 'Pangolin', cursive;
 }
 
 @media(max-width: 800px) {
+    .table .tablero {
+        width: 100%;
+    }
     .tapada img {
         width: 50px;
         height: 50px;

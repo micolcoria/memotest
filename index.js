@@ -13,6 +13,7 @@ const imagenes = [
     'img/zapas.jpg',
     'img/zapas.jpg'
 ]
+
 var clicks = 0; 
 var primerClick
 var segundoClick
@@ -26,7 +27,7 @@ for (var i = 1; i <= desordenado.length ; i++) {
     $('#img-'+ i).attr('data-img', desordenado[i-1])
 }
 
-//FUNCION RANDOM:
+//FUNCION RANDOM PARA DESORDENAR LAS IMAGENES:
 function mix(x) {
     for (let i = x.length - 1; i > 0; i--) {
         const y = Math.floor(Math.random() * (i + 1));
@@ -112,6 +113,7 @@ $('img').on('click', function () {
                 $('#'+ primerClick.id).attr('src',"img/tapada.jpg")
                 $('#'+ segundoClick.id).attr('src', 'img/tapada.jpg')
                 $(that).children().attr('src', "img/tapada.jpg")
+
                 clicks = 0
 
                 $('#' + primerClick.id).removeClass("pointer")
@@ -134,6 +136,7 @@ function guardarDatos(){
     }
     
     data = JSON.parse(data) //PARA CONVERTIR EL STRING EN UN ARRAY
+
     if (data == null) {
         data = []
     }
@@ -171,3 +174,14 @@ function modal () {
     })
   }
 nivel()
+
+
+
+
+
+
+
+
+
+
+
