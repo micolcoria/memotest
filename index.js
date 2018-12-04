@@ -140,6 +140,7 @@ function guardarDatos(){
     data.push(obj)
     localStorage.setItem('ranking', JSON.stringify(data))
     
+    
     //AGREGO LOS DATOS AL RANKING CUANDO ALGUIEN GANA:
     for (var i = 0; i < data.length; i++) {
         $('.player').append(`<p class='column'> ${data[i].nombre} </p>`),
