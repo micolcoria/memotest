@@ -170,5 +170,24 @@ body {
     height: 50px;
   }
 }
+@media (min-width: 300px) and (max-width: 500px) {
+  .tablero {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-left: 0%;
+    margin-bottom: 2px;
+  }
+  .tablero .tapada {
+    width: 80px;
+    height: 80px;
+  }
+  .tablero .tapada img {
+    width: 80px;
+    height: 80px;
+  }
+}
 
 /*# sourceMappingURL=styles.css.map */
