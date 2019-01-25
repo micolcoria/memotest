@@ -1,17 +1,17 @@
 //VARIABLES:
 const imagenes = [
-    'img/alce.jpg',
-    'img/alce.jpg',
-    'img/epelante.jpg',
-    'img/epelante.jpg',
-    'img/nena.jpg',
-    'img/nena.jpg',
-    'img/peces.jpg',
-    'img/peces.jpg',
-    'img/unichancho.jpg',
-    'img/unichancho.jpg',
-    'img/zapas.jpg',
-    'img/zapas.jpg'
+    'img/amethyst.jpg',
+    'img/amethyst.jpg',
+    'img/connie1.jpg',
+    'img/connie1.jpg',
+    'img/garnet.jpg',
+    'img/garnet.jpg',
+    'img/pearl.jpg',
+    'img/pearl.jpg',
+    'img/peridot.png',
+    'img/peridot.png',
+    'img/stevennn.jpg',
+    'img/stevennn.jpg'
 ]
 
 var clicks = 0; 
@@ -110,9 +110,9 @@ $('img').on('click', function () {
         } else {
             setTimeout (function() {
                 var that = this
-                $('#'+ primerClick.id).attr('src',"img/tapada.jpg")
-                $('#'+ segundoClick.id).attr('src', 'img/tapada.jpg')
-                $(that).children().attr('src', "img/tapada.jpg")
+                $('#'+ primerClick.id).attr('src',"img/tapadasteven.jpg")
+                $('#'+ segundoClick.id).attr('src', "img/tapadasteven.jpg")
+                $(that).children().attr('src', "img/tapadasteven.jpg")
 
                 clicks = 0
 
@@ -156,7 +156,7 @@ function guardarDatos(){
 //CUADRO DEL RANKING + MENSAJE + BOTON DE VOLVER A JUGAR
 function modal () {
     if (same === 6) {
-        
+        $('#table').addClass('hidden');
         $('#modal').removeClass('hidden');
         $('#modal').append(`<p>¡Ganaste 🎉! con ${tries} intentos </p>`)
         guardarDatos();

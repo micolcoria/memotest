@@ -1,10 +1,11 @@
 body {
-    background-image: url("../img/fondo.jpg")
+    background-image: url("../img/nuevofondo.jpg")
 }
 // VARIABLES DE FUENTES:
 $font-title: 'Pacifico', cursive;
 $color-title: dodgerblue;
-$font-p: 'Pangolin', cursive;
+// $font-p: 'Pangolin', cursive;
+$font-p: 'Fira Sans', sans-serif;
 
 // ESTILOS DE LA HOME:
 .home {
@@ -35,8 +36,8 @@ $font-p: 'Pangolin', cursive;
     .level {
         width: 80%;
         font-family: $font-p;
-        background-color: orange;
-        color: white;
+        background-color: rgb(255, 208, 0);
+        color:black;
         margin: 5px;
         border: 3px solid transparent;
         border-radius: 3px;
@@ -60,7 +61,7 @@ $font-p: 'Pangolin', cursive;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #f9e9e0;
+    background: rgba(248, 191, 229, 0.671);
     border-radius: 15px;
     border: 10px solid black;
     position: relative;
@@ -127,7 +128,7 @@ $font-p: 'Pangolin', cursive;
     .volver {
         width: 80%;
         font-family: $font-p;
-        color: white;
+        color: black;
         background-color: orange;
         border: 3px solid transparent;
         cursor: pointer;
