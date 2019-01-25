@@ -156,6 +156,7 @@ function guardarDatos(){
 //CUADRO DEL RANKING + MENSAJE + BOTON DE VOLVER A JUGAR
 function modal () {
     if (same === 6) {
+        $('#footer').removeClass('hidden');
         $('#table').addClass('hidden');
         $('#modal').removeClass('hidden');
         $('#modal').append(`<p>¡Ganaste 🎉! con ${tries} intentos </p>`)
